@@ -22,14 +22,17 @@ class Regression:
             epoch += 1
 
             print(gradient_theta_0 + gradient_theta_1)
-            self.theta_0 -= self.learning_rate * (1/len(x)) * gradient_theta_0
-            self.theta_1 -= self.learning_rate * (1/len(x)) * gradient_theta_1
+            self.theta_0 -= self.__minimize(len(x), gradient_theta_0)
+            self.theta_1 -= self.__minimize(len(x), gradient_theta_1)
 
     def __calculate_cost(self, x, y):
         return self.__hypothesis(x) - y
 
     def __hypothesis(self, x):
         return self.theta_0 + self.theta_1 * x
+
+    def __minimize(self, m, cost):
+        return self.learning_rate * (1/m) * cost
 
     def predict(self, x):
         return self.__hypothesis(x)
